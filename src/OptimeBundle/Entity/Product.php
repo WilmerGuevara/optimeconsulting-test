@@ -3,6 +3,8 @@
 namespace OptimeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Product
@@ -25,6 +27,7 @@ class Product
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $code;
 
@@ -32,6 +35,7 @@ class Product
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -39,6 +43,7 @@ class Product
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -46,6 +51,7 @@ class Product
      * @var string
      *
      * @ORM\Column(name="brand", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $brand;
 
@@ -53,12 +59,14 @@ class Product
      * @var float
      *
      * @ORM\Column(name="price", type="float")
+     * @Assert\NotBlank()
      */
     private $price;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     private $category;
 

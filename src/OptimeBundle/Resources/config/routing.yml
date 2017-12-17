@@ -1,3 +1,11 @@
+optime_product:
+    resource: "@OptimeBundle/Resources/config/routing/product.yml"
+    prefix:   /product
+
+optime_category:
+    resource: "@OptimeBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
 optime_homepage:
     path:     /
     defaults: { _controller: OptimeBundle:Default:index }
