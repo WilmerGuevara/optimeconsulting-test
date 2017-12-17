@@ -1,0 +1,3 @@
+optime_homepage:
+    path:     /
+    defaults: { _controller: OptimeBundle:Default:index }
