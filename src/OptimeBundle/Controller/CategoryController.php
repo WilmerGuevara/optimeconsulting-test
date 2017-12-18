@@ -29,7 +29,7 @@ class CategoryController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 5);
 
-        return $this->render('category/index.html.twig', array(
+        return $this->render('OptimeBundle:Category:index.html.twig', array(
             'pagination' => $pagination,
         ));
     }
@@ -52,7 +52,7 @@ class CategoryController extends Controller
             return $this->redirectToRoute('category_show', array('id' => $category->getId()));
         }
 
-        return $this->render('category/new.html.twig', array(
+        return $this->render('OptimeBundle:Category:new.html.twig', array(
             'category' => $category,
             'form' => $form->createView(),
         ));
@@ -66,7 +66,7 @@ class CategoryController extends Controller
     {
         $deleteForm = $this->createDeleteForm($category);
 
-        return $this->render('category/show.html.twig', array(
+        return $this->render('OptimeBundle:Category:show.html.twig', array(
             'category' => $category,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -88,7 +88,7 @@ class CategoryController extends Controller
             return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
         }
 
-        return $this->render('category/edit.html.twig', array(
+        return $this->render('OptimeBundle:Category:edit.html.twig', array(
             'category' => $category,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

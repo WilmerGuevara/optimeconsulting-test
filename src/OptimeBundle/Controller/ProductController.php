@@ -29,7 +29,7 @@ class ProductController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 5);
 
-        return $this->render('product/index.html.twig', array(
+        return $this->render('OptimeBundle:Product:index.html.twig', array(
             'pagination' => $pagination,
         ));
     }
@@ -52,7 +52,7 @@ class ProductController extends Controller
             return $this->redirectToRoute('product_show', array('id' => $product->getId()));
         }
 
-        return $this->render('product/new.html.twig', array(
+        return $this->render('OptimeBundle:Product:new.html.twig', array(
             'product' => $product,
             'form' => $form->createView(),
         ));
@@ -66,7 +66,7 @@ class ProductController extends Controller
     {
         $deleteForm = $this->createDeleteForm($product);
 
-        return $this->render('product/show.html.twig', array(
+        return $this->render('OptimeBundle:Product:show.html.twig', array(
             'product' => $product,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -88,7 +88,7 @@ class ProductController extends Controller
             return $this->redirectToRoute('product_edit', array('id' => $product->getId()));
         }
 
-        return $this->render('product/edit.html.twig', array(
+        return $this->render('OptimeBundle:Product:edit.html.twig', array(
             'product' => $product,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
