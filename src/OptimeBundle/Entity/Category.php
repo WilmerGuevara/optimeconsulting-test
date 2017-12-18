@@ -27,12 +27,11 @@ class Category
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *      min = 4,
-     *      max = 10,
-     *      minMessage = "Code must be at least {{ limit }} characters long",
-     *      maxMessage = "Code cannot be longer than {{ limit }} characters"
+     * @Assert\NotBlank(message="Este campo es requerido")
+     * @Assert\Regex(
+     *     pattern="(^[a-zA-Z0-9]*$)",
+     *     match=true,
+     *     message="El código no puede contener caracteres especiales ni espacios"
      * )
      */
     private $code;
@@ -41,7 +40,11 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()   
+     * @Assert\NotBlank(message="Este campo es requerido") 
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "El nombre debe contener al menos {{ limit }} caracteres de longitud",
+     * )  
      */
     private $name;
 
@@ -49,7 +52,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Este campo es requerido")
      */
     private $description;
 
@@ -222,5 +225,13 @@ class Category
         return $this->name;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * @Assert\IsTrue(message="El nombre y el código no pueden repetirse")
+     */
+    public function isCodeLegal()
+    {
+        return $this->code !== $this->name;
     }
 }

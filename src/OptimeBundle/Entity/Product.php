@@ -27,7 +27,18 @@ class Product
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Este campo es requerido")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 10,
+     *      minMessage = "El código debe contener al menos {{ limit }} caracteres de longitud",
+     *      maxMessage = "El código puede contener como máximo {{ limit }} caracteres de longitud"
+     * )
+     * @Assert\Regex(
+     *     pattern="(^[a-zA-Z0-9]*$)",
+     *     match=true,
+     *     message="El código no puede contener caracteres especiales ni espacios"
+     * )
      */
     private $code;
 
@@ -35,7 +46,11 @@ class Product
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Este campo es requerido")
+     * @Assert\Length(
+     *      min = 4,
+     *      minMessage = "El nombre debe contener al menos {{ limit }} caracteres de longitud",
+     * )
      */
     private $name;
 
@@ -43,7 +58,7 @@ class Product
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Este campo es requerido")
      */
     private $description;
 
@@ -51,7 +66,7 @@ class Product
      * @var string
      *
      * @ORM\Column(name="brand", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Este campo es requerido")
      */
     private $brand;
 
@@ -59,14 +74,14 @@ class Product
      * @var float
      *
      * @ORM\Column(name="price", type="float")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Este campo es requerido")
      */
     private $price;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Este campo es requerido")
      */
     private $category;
 
@@ -223,5 +238,13 @@ class Product
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @Assert\IsTrue(message="El nombre y el código no pueden repetirse")
+     */
+    public function isCodeLegal()
+    {
+        return $this->code !== $this->name;
     }
 }
