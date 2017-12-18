@@ -29,6 +29,14 @@
                     <th>Precio</th>
                     <td>{{ product.price }}</td>
                 </tr>
+                 <tr>
+                    <th>Categor&iacute;a</th>
+                    <td>{{ product.category }}</td>
+                </tr>
+                 <tr>
+                    <th>Categor&iacute;a activa</th>
+                    <td>{% if product.category.active %}<span class="badge badge-success">Si</span>{% else %}<span class="badge badge-danger">No</span>{% endif %}</td>
+                </tr>
             </tbody>
         </table>
         <ul class="nav nav-pills">
@@ -39,8 +47,8 @@
                 <a class="nav-link" href="{{ path('product_edit', { 'id': product.id }) }}">Editar</a>
             </li>
             <li class="nav-item">
-                {{ form_start(delete_form) }}
-                    <input class="btn btn-danger nav-link" type="submit" value="Eliminar">
+                {{ form_start(delete_form,{'onsubmit':'return confirmOption();'}) }}
+                    <input class="btn btn-danger nav-link .delete-btn" type="submit" value="Eliminar">
                 {{ form_end(delete_form) }}
             </li>
         </ul>

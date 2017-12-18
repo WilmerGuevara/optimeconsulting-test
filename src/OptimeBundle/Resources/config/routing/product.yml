@@ -22,3 +22,8 @@ product_delete:
     path:     /{id}/delete
     defaults: { _controller: "OptimeBundle:Product:delete" }
     methods:  DELETE
+
+product_active:
+    path:     /active
+    defaults: { _controller: "OptimeBundle:Product:active" }
+    methods:  GET

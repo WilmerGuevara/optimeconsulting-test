@@ -6,6 +6,7 @@ use OptimeBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+
 /**
  * Product controller.
  *
@@ -20,9 +21,58 @@ class ProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $dql   = "SELECT p FROM OptimeBundle:Product p";
+        $query = $em->getRepository('OptimeBundle:Product')->createQueryBuilder('p');  
+
+        //$products = $em->getRepository('OptimeBundle:Product')->findAll();
+
+        if ($request->query->getAlnum('filter')) {
+            $query
+                ->where('p.name LIKE :name')
+                ->setParameter('name', '%' . $request->query->getAlnum('filter') . '%');
+        }
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 5);
+
+        return $this->render('OptimeBundle:Product:index.html.twig', array(
+            'pagination' => $pagination,
+        ));
+    }
+
+    /**
+     * Filters Lists from all product entities.
+     *
+     */
+    public function filterAction(Request $request){
+
+        $query = $em->getRepository('OptimeBundle:Product')->createQueryBuilder('p');  
+
+        if ($request->query->getAlnum('filter')) {
+            $query
+                ->where('p.name LIKE :name')
+                ->setParameter('name', '%' . $request->query->getAlnum('filter') . '%');
+        }
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 5);
+
+        return $this->render('OptimeBundle:Product:index.html.twig', array(
+            'pagination' => $pagination,
+        ));
+    }
+
+    /**
+     * Lists all product entities with category active = true.
+     *
+     */
+    public function activeAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $dql = "SELECT p FROM OptimeBundle:Product p JOIN OptimeBundle:Category c WITH p.category=c.id WHERE c.active=true";
 
         $query = $em->createQuery($dql);
+        
 
         //$products = $em->getRepository('OptimeBundle:Product')->findAll();
 

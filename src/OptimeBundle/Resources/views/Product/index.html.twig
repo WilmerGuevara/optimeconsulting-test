@@ -3,7 +3,16 @@
 {% block body %}
     <div class="col-sm-12">
         <h2>Listado de Productos</h2>
-        <span class="badge badge-pill badge-info">Cantidad de productos: {{pagination.getTotalItemCount}}</span>
+        <p>
+            <span class="badge badge-pill badge-info">Cantidad de productos: {{pagination.getTotalItemCount}}</span>
+        </p>
+        <form class="form-inline" action="" method="GET">
+            <div class="form-group mx-sm-3">
+                <label for="filter" class="sr-only">Buscar por nombre</label>
+                <input type="text" name="filter" class="form-control" id="filter" placeholder="Buscar por Nombre">
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
         <nav class="navbar navbar-light bg-faded">
             <a class="btn btn-success" href="{{ path('product_new') }}">Crear producto</a>
         </nav>            
@@ -16,6 +25,7 @@
                     <th scope="col">Descripción</th>
                     <th scope="col">Marca</th>
                     <th scope="col">{{knp_pagination_sortable(pagination, 'Precio', 'p.price')}}</th>
+                    <th scope="col">Categor&iacute;a</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -28,6 +38,7 @@
                     <td>{{ product.description }}</td>
                     <td>{{ product.brand }}</td>
                     <td>{{ product.price }}</td>
+                    <td><a href="{{ path('category_show', { 'id': product.category.id }) }}">{{ product.category }}</a></td>
                     <td>
                         <a class="btn btn-secondary" href="{{ path('product_show', { 'id': product.id }) }}">Ver</a>
                         <a class="btn btn-secondary" href="{{ path('product_edit', { 'id': product.id }) }}">Editar</a>

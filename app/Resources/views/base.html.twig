@@ -4,12 +4,37 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{{asset('public/css/bootstrap.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/css/bootstrap.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="{{ asset('public/js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('public/js/bootstrap.bundle.js') }}"></script>
+        <script src="{{ asset('public/js/utils.js') }}"></script>
     </head>
-    <body>
+    <body>        
         <div class="container">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+              <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Productos</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ path('product_new') }}">Crear Producto</a>
+                    <a class="dropdown-item" href="{{ path('product_index') }}">Todos los productos</a>
+                    <a class="dropdown-item" href="{{ path('product_active') }}">Productos -> Categor&iacute;a activa</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categor&iacute;as</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ path('category_new') }}">Crear Categor&iacute;a</a>
+                    <a class="dropdown-item" href="{{ path('category_index') }}">Todas los Categor&iacute;as</a>
+                  </div>
+                </li>
+              </ul>
+            </nav>
             <div class="row">
                 {% block body %}{% endblock %}
             </div>

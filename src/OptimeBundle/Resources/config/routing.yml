@@ -8,4 +8,4 @@ optime_category:
 
 optime_homepage:
     path:     /
-    defaults: { _controller: OptimeBundle:Default:index }
+    defaults: { _controller: OptimeBundle:Product:index }

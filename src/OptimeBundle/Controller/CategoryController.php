@@ -6,6 +6,7 @@ use OptimeBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+
 /**
  * Category controller.
  *
