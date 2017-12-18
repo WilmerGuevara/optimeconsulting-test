@@ -24,7 +24,7 @@ class ProductController extends Controller
 
         $query = $em->createQuery($dql);
 
-        $products = $em->getRepository('OptimeBundle:Product')->findAll();
+        //$products = $em->getRepository('OptimeBundle:Product')->findAll();
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 5);

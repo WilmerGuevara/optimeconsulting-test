@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category creation</h1>
-
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <div class="col-sm-10 offset-2">
+        <h2>Crear Categor&iacute;a</h2>
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_widget(form) }}
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input class="btn btn-primary" type="submit" value="Crear" />
+                </div>
+            </div>
+        {{ form_end(form) }}
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('category_index') }}">Volver al listado</a>
+            </li>
+        </ul>
+    </div>
 {% endblock %}

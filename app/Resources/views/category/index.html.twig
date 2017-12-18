@@ -1,45 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Categories list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Active</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{{ category.code }}</td>
-                <td>{{ category.name }}</td>
-                <td>{{ category.description }}</td>
-                <td>{% if category.active %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('category_show', { 'id': category.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('category_edit', { 'id': category.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('category_new') }}">Create a new category</a>
-        </li>
-    </ul>
+    <div class="col-sm-12">
+        <h2>Listado de Categor&iacute;as</h2>
+        <nav class="navbar navbar-light bg-faded">
+            <a class="btn btn-success" href="{{ path('category_new') }}">Crear categor&iacute;a</a>
+        </nav> 
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">{{knp_pagination_sortable(pagination, 'Id', 'c.id')}}</th>
+                    <th scope="col">{{knp_pagination_sortable(pagination, 'Código', 'c.code')}}</th>
+                    <th scope="col">{{knp_pagination_sortable(pagination, 'Nombre', 'c.name')}}</th>
+                    <th scope="col">Descripci&oacute;n</th>
+                    <th scope="col">{{knp_pagination_sortable(pagination, 'Activo', 'c.active')}}</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in pagination %}
+                <tr>
+                    <th scope="row"><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></th>
+                    <td>{{ category.code }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                    <td>{% if category.active %}<span class="badge badge-success">Si</span>{% else %}<span class="badge badge-danger">No</span>{% endif %}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{{ path('category_show', { 'id': category.id }) }}">Ver</a>
+                        <a class="btn btn-secondary" href="{{ path('category_edit', { 'id': category.id }) }}">Editar</a>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
 {% endblock %}

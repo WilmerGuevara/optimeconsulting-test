@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="col-sm-10 offset-2">
+        <h2>Editar Categor&iacute;a</h2>
+        {{ form_start(edit_form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_widget(edit_form) }}
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input class="btn btn-primary" type="submit" value="Editar" />
+                </div>
+            </div>
+        {{ form_end(edit_form) }}
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('category_index') }}">Volver al listado</a>
+            </li>
+            <li class="nav-item">
+                {{ form_start(delete_form) }}
+                    <input class="nav-link btn btn-danger" type="submit" value="Eliminar">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
 {% endblock %}

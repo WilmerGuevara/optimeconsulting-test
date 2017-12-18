@@ -41,12 +41,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()  
-     * @Assert\Regex(
-     * pattern="#$%^&*()+=-[]';,./{}|:<>?~",
-     * match=false,
-     * message="Mal"
-     * ) 
+     * @Assert\NotBlank()   
      */
     private $name;
 

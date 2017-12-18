@@ -16,14 +16,21 @@ class CategoryController extends Controller
      * Lists all category entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categories = $em->getRepository('OptimeBundle:Category')->findAll();
+        $dql   = "SELECT c FROM OptimeBundle:Category c";
+
+        $query = $em->createQuery($dql);
+
+        //$categories = $em->getRepository('OptimeBundle:Category')->findAll();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 5);
 
         return $this->render('category/index.html.twig', array(
-            'categories' => $categories,
+            'pagination' => $pagination,
         ));
     }
 
