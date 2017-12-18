@@ -47,7 +47,7 @@
                 <a class="nav-link" href="{{ path('product_edit', { 'id': product.id }) }}">Editar</a>
             </li>
             <li class="nav-item">
-                {{ form_start(delete_form,{'onsubmit':'return confirmOption();'}) }}
+                {{ form_start(delete_form,{'attr': {'id': 'product_show'}}) }}
                     <input class="btn btn-danger nav-link .delete-btn" type="submit" value="Eliminar">
                 {{ form_end(delete_form) }}
             </li>

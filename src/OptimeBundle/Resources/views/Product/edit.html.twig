@@ -16,7 +16,7 @@
                 <a class="nav-link" href="{{ path('product_index') }}">Volver al listado</a>
             </li>
             <li class="nav-item">
-                {{ form_start(delete_form) }}
+                {{ form_start(delete_form, {'attr': {'id': 'product_edit'}}) }}
                     <input class="nav-link btn btn-danger" type="submit" value="Eliminar">
                 {{ form_end(delete_form) }}
             </li>

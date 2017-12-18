@@ -36,7 +36,7 @@
                 <a class="nav-link" href="{{ path('category_edit', { 'id': category.id }) }}">Editar</a>
             </li>
             <li class="nav-item">
-                {{ form_start(delete_form) }}
+                {{ form_start(delete_form, {'attr': {'id': 'category_show'}}) }}
                     <input class="btn btn-danger nav-link delete-btn" type="submit" value="Eliminar">
                 {{ form_end(delete_form) }}
             </li>
